@@ -66,6 +66,16 @@ server.delete("/api/lessons/:id", (req, res) => {
   }
 });
 
+server.get("/api/channels/:id", (req, res) => {
+  const { id } = req.params;
+  const oneChannel = channels.find((channel) => channel.id === id);
+  if (oneChannel) {
+    res.status(200).json(oneChannel);
+  } else {
+    res.status(404).json({ message: "Channel requested does no exist" });
+  }
+});
+
 server.listen(PORT, () => {
   console.log(`\n*** Server running on htt://localhost:${PORT}`);
 });
