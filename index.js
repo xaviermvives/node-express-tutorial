@@ -48,7 +48,21 @@ server.delete("/api/channels/:id", (req, res) => {
   } else {
     res
       .status(404)
-      .json({ message: "Channel your are looking for does not exists" });
+      .json({ message: "Channel you are looking for does not exist" });
+  }
+});
+
+server.delete("/api/lessons/:id", (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+  const deleted = lessons.find((lesson) => lesson.id === id);
+  if (deleted) {
+    lessons = lessons.filter((lesson) => lesson.id != id);
+    res.status(200).json(deleted);
+  } else {
+    res
+      .status(404)
+      .json({ message: "Lesson you are looking fo does not exist" });
   }
 });
 
