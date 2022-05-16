@@ -86,6 +86,20 @@ server.get("/api/lessons/:id", (req, res) => {
   }
 });
 
+server.put("/api/channels/:id", (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+
+  const index = channels.findIndex((channel) => channel.id === id);
+
+  if (index != -1) {
+    channels[index] = changes;
+    res.status(200).json(channels[index]);
+  } else {
+    res.status(404).json({ message: "Channel requested does not exist" });
+  }
+});
+
 server.listen(PORT, () => {
   console.log(`\n*** Server running on htt://localhost:${PORT}`);
 });
