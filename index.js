@@ -100,6 +100,21 @@ server.put("/api/channels/:id", (req, res) => {
   }
 });
 
+server.patch("/api/lessons/:id", (req, res) => {
+  const changes = req.body;
+  const { id } = req.params;
+
+  const found = lessons.find((lesson) => lesson.id === id);
+
+  if (found) {
+    Object.assign(found, changes);
+
+    res.status(200).json(changes);
+  } else {
+    res.status(404).json({ message: "Lesson requested does not exist" });
+  }
+});
+
 server.listen(PORT, () => {
   console.log(`\n*** Server running on htt://localhost:${PORT}`);
 });
