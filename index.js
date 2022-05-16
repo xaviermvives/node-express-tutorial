@@ -5,8 +5,8 @@ const server = express();
 
 server.use(express.json());
 
-const channels = [];
-const lessons = [];
+let channels = [];
+let lessons = [];
 
 const PORT = 5000;
 
@@ -35,6 +35,21 @@ server.post("/api/lessons", (req, res) => {
   lessonInfo.id = shortId.generate();
   lessons.push(lessonInfo);
   res.status(201).json(lessonInfo);
+});
+
+server.delete("/api/channels/:id", (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+  const deleted = channels.find((channel) => channel.id === id);
+  // console.log(deleted);
+  if (deleted) {
+    channels = channels.filter((channel) => channel.id != id);
+    res.status(200).json(deleted);
+  } else {
+    res
+      .status(404)
+      .json({ message: "Channel your are looking for does not exists" });
+  }
 });
 
 server.listen(PORT, () => {
