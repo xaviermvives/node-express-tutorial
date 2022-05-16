@@ -19,6 +19,7 @@
   "homepage": "https://github.com/xaviermvives/node-express-tutorial#readme",
   "dependencies": {
     "express": "^4.18.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "shortid": "^2.2.16"
   }
 }
