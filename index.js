@@ -26,6 +26,17 @@ server.get("/api/channels", (req, res) => {
   res.status(200).json(channels);
 });
 
+server.get("/api/lessons", (req, res) => {
+  res.status(200).json(lessons);
+});
+
+server.post("/api/lessons", (req, res) => {
+  const lessonInfo = req.body;
+  lessonInfo.id = shortId.generate();
+  lessons.push(lessonInfo);
+  res.status(201).json(lessonInfo);
+});
+
 server.listen(PORT, () => {
   console.log(`\n*** Server running on htt://localhost:${PORT}`);
 });
